@@ -3,7 +3,7 @@ const express = require('express');
 const dotenv = require('dotenv');
 dotenv.config(); 
 // lets us do process.env (get variables from .env file)
-const { getFruits } = require('./Controllers/fruits.js');
+const { getFruits, postVeggies, getVeggies, getveggieByName } = require('./Controllers/index.js');
 
 const Fruit = require('./Models/Fruit.js');
 // now I can use process.env.VARIABLE_NAME
@@ -41,7 +41,15 @@ app.delete('/fruits/:idOfFruit', async (req, res) => {
     res.send(databaseResponse)
 })
 
+app.get('/veggies', getVeggies);
+
+app.post('/create_veggie', postVeggies);
+
+app.get('/veggies/:veggieName', getveggieByName)
+
+
 
 app.listen(4001, () => {
     console.log("listening on 4001")
 })
+
